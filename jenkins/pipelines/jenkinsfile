@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'master',
+                    url: 'https://github.com/alorodri/tests-jenkins.git'
+            }
+        }
+        stage('mvn build') {
+            steps {
+                withMaven() {}
+                sh 'mvn install'
+            }
+        }
+    }
+}
